@@ -13,10 +13,6 @@
     "ejs": "2.4.1",
     "express": "4.13.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
-  },
   "keywords": [
     "node",
     "heroku",
