@@ -7,26 +7,40 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "export NODE_ENV=test && mocha test",
+    "try": "node sms.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
+    "dotenv": "^2.0.0",
     "ejs": "2.4.1",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
+    "mocha": "^3.1.2",
     "mongodb": "^2.2.11",
     "mongoose": "^4.6.5",
     "morgan": "^1.7.0",
     "path": "^0.12.7",
+    "supertest": "^2.0.1",
     "twilio": "^2.11.0"
   },
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "twilio",
+    "hackathon",
+    "cambridge"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "supertest": "^2.0.1"
+  }
 }

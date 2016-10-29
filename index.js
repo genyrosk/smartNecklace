@@ -6,39 +6,37 @@ var flash 		= require('connect-flash');
 var morgan 		= require('morgan');
 var csurf 		= require('csurf');
 
+var config = require('./config');
+// var twilioNotifications = require('./middleware/twilioNotifications');	// outputs an error
+
 var app = express();
-var router 		= express.Router();
+var router 	= express.Router();
 
 app.set('port', (process.env.PORT || 5000));
 
-// app.use(express.static(__dirname + '/public'));
-
+/*	Load views
+*/
 // views is directory for all template files
 // app.set('views', __dirname + '/views');
 // app.set('view engine', 'ejs');
 
-
-/**
-*	Use morgan for HTTP request logging in dev and prod
+/*  Use morgan for HTTP request logging in dev and prod
 */
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('combined'));
 }
 
-/**
-*	Serve static assets
+/*  Serve static assets
 */
 app.use(express.static(path.join(__dirname, 'public')));
 
-/**	
-*	Parse incoming form-encoded HTTP bodies
+/*  Parse incoming form-encoded HTTP bodies
 */
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-/**
-*	Create and manage HTTP sessions for all requests
+/*  Create and manage HTTP sessions for all requests
 */
 // app.use(session({
 //   secret: config.secret,
@@ -46,12 +44,17 @@ app.use(bodyParser.urlencoded({
 //   saveUninitialized: true
 // }));
 
-/**
-*	Use connect-flash to persist informational messages across redirects
+/*  Use connect-flash to persist informational messages across redirects
 */
 app.use(flash());
 
-// Add CSRF protection for web routes
+// Configure application routes
+var routes = require('./routes/router');
+routes(router);
+app.use(router);
+
+/*  Add CSRF protection for web routes 
+*/
 // if (process.env.NODE_ENV !== 'test') {
 //   app.use(csurf());
 //   app.use(function(req, res, next) {
@@ -65,9 +68,10 @@ app.get('/', function(req, res) {
 	// res.render('pages/index');
 });
 
+/*   Start the server
+*/
 app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
 });
-
 
 module.exports = app;
