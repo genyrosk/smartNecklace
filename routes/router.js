@@ -10,7 +10,7 @@ module.exports = function(router) {
 
 	router.get('/sms', (req, res) => {
 		twilioClient
-			.sendSms('+447767960919', 'incorporating twilio into the express api')
+			.sendSms('+447767960919', 'this is the Palantir CEO speaking. You are hired bro')
 			.then((data) => {
 				console.log('received answer from the twilioClient');
 				res.send('sms succesfully sent from ' + data.from + ' with body: ' + data.body);
