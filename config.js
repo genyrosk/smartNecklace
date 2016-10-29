@@ -12,6 +12,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
 
 /** 
 *	HTTP Port to run our web application
+*	process.env.PORT lets the port be set by Heroku
 */
 cfg.port = process.env.PORT || 3000;
 

@@ -6,6 +6,9 @@ var flash 		= require('connect-flash');
 var morgan 		= require('morgan');
 var csurf 		= require('csurf');
 
+/**
+*	Import the configuration file 
+*/
 var config = require('./config');
 // var twilioNotifications = require('./middleware/twilioNotifications');	// outputs an error
 
