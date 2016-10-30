@@ -12,6 +12,10 @@ bluetooth
 ### Try it out
 [GitHub Repo](https://github.com/genyrosk/smartNecklace)
 
+----------------------- ------------------------------------
+![GitHub Repo](https://github.com/genyrosk/smartNecklace)
+------------------------------------------------------------
+
 
 # Inspiration
 For elderly, ill or disabled family and friends, the risk of falling is a serious concern. In fact, research carried out by the Department of Surgery at the University of Rochester medical centre found that the elderly over the age 70 are three times more likely to be fatally injured. In many cases, for elderly adults who are frail and have pre-existing medical conditions, what seems like a minor fall can lead to a broken hip or bones. In the scenario that these individuals are alone or cannot easily gain access to someone - this can lead to far reaching and very serious consequences.
