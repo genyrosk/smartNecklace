@@ -61,6 +61,13 @@ module.exports = function(router) {
 	});
 
 	/**
+	*   Connect request from the BBC Microbit
+	*/
+	// router.get('/connect', (req, res) => {
+	// 	res.json({connected: true});
+	// });
+
+	/**
 	*   Requests Twilio to make a call to a default number
 	*/
 	router.get('/call', (req, res) => {
@@ -83,19 +90,31 @@ module.exports = function(router) {
 
 		/** 
 		*/
-		console.log(req.params.id);
 		var admins = require('../data/data.json');
 		var tel = admins[req.params.id].phoneNumber;
+		console.log(req.params.id);
 		console.log(tel);
 
 		twilioClient
 			.call(tel)
 			.then((data) => {
 				console.log('call from ' + data.from + ' to ' + data.to);
+				setTimeout( () => { 
+					tel = admins[0].phoneNumber;
+					twilioClient
+						.call(tel)
+						.then((data) => {
+							console.log('call from ' + data.from + ' to ' + data.to);
+						})
+						.catch( (err) =>{
+							console.log(err);
+						});
+				}, 20000);
 			})
 			.catch( (err) =>{
 				console.log(err);
 			});
+
 		res.send('Call made');
 	});
 
@@ -114,12 +133,15 @@ module.exports = function(router) {
 			.pause({length: '1'})
 			// .say({voice:'alice', language:'en-gb'}, 'Your grandad is on the highway to HELL and needs urgent medical assistance.')
 			// .pause({length: '1'})
-			.say({voice:'alice', language:'en-gb'}, 'Your grandad just had an horrible accident. He')
-			.say('got rekt')
-			.say({voice:'alice', language:'en-gb'}, 'hahah LOL')
-			.say('360 no scoped')
+			.say({voice:'alice', language:'en-gb'}, 'Your grandad may just have had an accident.')
+			.say('Please check on him and call the emergency services if needed.')
+			// .say({voice:'alice', language:'en-gb'}, 'hahah LOL')
+			// .say('360 no scoped')
 			.play('http://b443bf9e.ngrok.io/airhorn.mp3')
-			.say('get rekt mate')
+			// .pause({length: '1'})
+			// .say('get rekt mate')
+			// .play('http://b443bf9e.ngrok.io/headshot.mp3')
+			// .play('http://b443bf9e.ngrok.io/weed.mp3')
 			// .play('https://api.twilio.com/cowbell.mp3')
 			// .pause({length: '1'})
 			// .say({voice:'alice', language:'en-gb'}, 'Should I call the emergency services ?')
@@ -141,7 +163,7 @@ module.exports = function(router) {
 	});
 
 	/**
-	*
+	*	If transcript is enabled, Twilio will make a POST request to this url
 	*/
 	router.post('/emergency', (req, res) => {
 		// console.log(req);
@@ -164,27 +186,29 @@ module.exports = function(router) {
 		}
 	});
 
-	router.post('/test', (req, res) => {
-
-		res.redirect('/call/0');
-		res.send('yup');
-	});
-
 	/**
 	*   Monitor the progress of the call
 	*
 	*   During a call, Twilio will update on the progress of the call 
 	*   by posting to this url
 	*/
+	var callStatusHistory = {
+		status: "undefined",
+		history: []
+	}
+
 	router.post('/events', (req, res) => {
 		var to = req.body.To;
 		var fromNumber = req.body.From;
 		var callStatus = req.body.CallStatus;
 		var callSid = req.body.CallSid;
 
-		console.log(req);
+		// console.log(req);
+		callStatusHistory.history.push(callStatusHistory.status);
+		callStatusHistory.status = callStatus;
+		console.log(req.body);
 
-		console.log(to, fromNumber, callStatus, callSid);
+		console.log(to, fromNumber, callStatus);
 		res.send('Event received');
 	});
 
