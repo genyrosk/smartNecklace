@@ -8,7 +8,7 @@ function formatMessage(errorToReport) {
 		'for more details.';
 };
 
-exports.notifyOnError = function(appError, request, response, next) {
+exports.notifyOnError = function(appError, req, res, next) {
 	admins.forEach(function(admin) {
 		var messageToSend = formatMessage(appError.message);
 		twilioClient.sendSms(admin.phoneNumber, messageToSend);

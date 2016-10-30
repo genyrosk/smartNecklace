@@ -15,13 +15,13 @@ var config = require('./config');
 var app = express();
 var router 	= express.Router();
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 3000));
 
 /*	Load views
 */
 // views is directory for all template files
-// app.set('views', __dirname + '/views');
-// app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 /*  Use morgan for HTTP request logging in dev and prod
 */
@@ -35,9 +35,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /*  Parse incoming form-encoded HTTP bodies
 */
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.set('json spaces', 2);
 
 /*  Create and manage HTTP sessions for all requests
 */
@@ -69,6 +69,10 @@ app.use(router);
 app.get('/', function(req, res) {
 	res.send('not using YARN aymore (2nd attempt with Heroku)');
 	// res.render('pages/index');
+});
+
+app.get('*', function(req, res){
+  res.status(404).send('Not found');
 });
 
 /*   Start the server

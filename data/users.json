@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Evgeny",
+      "phoneNumber": "+447767960919",
+      "address": "Cambridge",
+      "guardians": [
+        {
+          "name": "Dad",
+          "age": "62",
+          "relation": "father",
+          "phoneNumber": "+44776796091",
+          "priority": 1
+        },
+        {
+          "name": "Mum",
+          "age": "57",
+          "relation": "mother",
+          "phoneNumber": "+447767960919",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Jawwad",
+      "phoneNumber": "+447403826477",
+      "address": "Cambridge",
+      "guardians": [
+        {
+          "name": "Dad",
+          "age": "59",
+          "relation": "father",
+          "phoneNumber": "+447403826477",
+          "priority": 1
+        },
+        {
+          "name": "Mum",
+          "age": "54",
+          "relation": "mother",
+          "phoneNumber": "+447403826477",
+          "priority": 2
+        }
+      ]
+    }
+  ]
+}
