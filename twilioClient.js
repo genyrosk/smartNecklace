@@ -47,10 +47,10 @@ twilioClient.prototype.sendSms = function(to, message) {
 twilioClient.prototype.call = function(to) {
 	return new Promise ( (resolve, reject) => {
 		twilio.calls.create({
-			url: 'http://b443bf9e.ngrok.io/voice',
+			url: 'http://1df8a7d1.ngrok.io/voice',
 			to: to,
 			from: config.sendingNumber,
-			statusCallback: 'http://b443bf9e.ngrok.io/voice',
+			statusCallback: 'http://1df8a7d1.ngrok.io/voice',
 			statusCallbackMethod: 'POST',
 			statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed'],
 		}, (err, call) => {

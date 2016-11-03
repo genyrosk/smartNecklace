@@ -71,8 +71,13 @@ module.exports = function(router) {
 	*   Requests Twilio to make a call to a default number
 	*/
 	router.get('/call', (req, res) => {
+		
+		var admins = require('../data/data.json');
+		var tel = admins[1].phoneNumber;
+		console.log(tel);
+
 		twilioClient
-			.call('+447767960919')
+			.call(tel)
 			.then((data) => {
 				console.log('call from ' + data.from + ' to ' + data.to);
 			})
@@ -137,7 +142,7 @@ module.exports = function(router) {
 			.say('Please check on him and call the emergency services if needed.')
 			// .say({voice:'alice', language:'en-gb'}, 'hahah LOL')
 			// .say('360 no scoped')
-			.play('http://b443bf9e.ngrok.io/airhorn.mp3')
+			.play('http://1df8a7d1.ngrok.io/airhorn.mp3')
 			// .pause({length: '1'})
 			// .say('get rekt mate')
 			// .play('http://b443bf9e.ngrok.io/headshot.mp3')
